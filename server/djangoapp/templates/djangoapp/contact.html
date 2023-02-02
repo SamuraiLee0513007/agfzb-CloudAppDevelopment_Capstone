@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="UTF-8">
+    <title>Contact Us</title>
+    {% load static %}
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <link href="https://unpkg.com/bootstrap-table@1.18.2/dist/bootstrap-table.min.css" rel="stylesheet">
+    <script src="https://unpkg.com/bootstrap-table@1.18.2/dist/bootstrap-table.min.js"></script>
+    <script src="https://unpkg.com/bootstrap-table@1.18.2/dist/extensions/filter-control/bootstrap-table-filter-control.min.js"></script>
+
+</head>
+
+    <body>
+        <nav class="navbar navbar-expand-sm bg-light">
+            <div class="container-fluid">
+                <div class="navbar-brand">
+                    <img src="https://st4.depositphotos.com/25658280/27299/v/600/depositphotos_272990568-stock-illustration-car-dealer-logo-icon-vector.jpg" 
+                     alt="company logo" width="60px" >
+                    <b>Best Cars Dealership</b>
+                </div>
+            <ul class="navbar-nav ml-auto">
+    
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'djangoapp:index' %}">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" class="active" href="{% url 'djangoapp:about' %}">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'djangoapp:contact' %}">Contact Us</a>
+                </li>
+        
+            </ul>
+            </div>
+        </nav>
+       <div class="card mx-auto" style="width:400px">
+        <img src="https://media.istockphoto.com/id/1271752802/photo/phone-and-e-mail-icons-on-wooden-cubes-with-contact-us-text-on-blue-background-web-page.jpg?b=1&s=170667a&w=0&k=20&c=hMJ1eJq3u3oHbWGeu4ff2PUWD8w5DHu2A_zJgVAa6pk="
+        class="card-img-top" alt="contact us image">
+        <h4 class="card-title"><br>&emsp;Feel free to reach out to us at : </h4>
+           <address class="card-body">
+               Best Cars Dealership
+                <br>120/A ABC Road,
+                <br>Branton Town,
+                <br>Buckaroo City, LA
+                <br>Zip Code : 999999
+                <br>Contact : 1800-999-9999
+                <br>Email : bestcarsdealership@example.com
+           </address>
+        
+    </div>
+          
+  </body>
+  
+
+</html>

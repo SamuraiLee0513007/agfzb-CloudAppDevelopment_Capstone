@@ -12,11 +12,34 @@
     <script src="https://unpkg.com/bootstrap-table@1.18.2/dist/extensions/filter-control/bootstrap-table-filter-control.min.js"></script>
 
 </head>
-
+    {% load static %}
     <body>
     <!-- Remove this line the first time you edit this file -->
-     This is the index page of your Django app!
+     <!-- This is the index page of your Django app! -->
     <!--Add a nav bar here -->
+    <nav class="navbar navbar-expand-sm bg-light">
+        <div class="container-fluid">
+            <div class="navbar-brand">
+                <img src="https://st4.depositphotos.com/25658280/27299/v/600/depositphotos_272990568-stock-illustration-car-dealer-logo-icon-vector.jpg" 
+                alt="company logo" width="60px" >
+                <b>Best Cars Dealership</b>
+            </div>
+        <ul class="navbar-nav ml-auto">
+
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'djangoapp:index' %}">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" class="active" href="{% url 'djangoapp:about' %}">About</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'djangoapp:contact' %}">Contact Us</a>
+            </li>
+    
+        </ul>
+        </div>
+    </nav>
+    
 
     <!--Add a dealer table here -->
 
