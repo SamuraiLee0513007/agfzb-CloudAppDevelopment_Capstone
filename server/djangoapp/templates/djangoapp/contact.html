@@ -28,19 +28,19 @@
             <ul class="navbar-nav ml-auto">
     
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'djangoapp:index' %}">Home</a>
+                    <a class="nav-link" style="font-weight: bold; color: black" href="{% url 'djangoapp:index' %}">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" class="active" href="{% url 'djangoapp:about' %}">About</a>
+                    <a class="nav-link" style="font-weight: bold; color: black" class="active" href="{% url 'djangoapp:about' %}">About</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'djangoapp:contact' %}">Contact Us</a>
+                    <a class="nav-link" style="font-weight: bold; color: black" href="{% url 'djangoapp:contact' %}">Contact Us</a>
                 </li>
 
                 {% if user.is_authenticated %}
                 <li>
-                    <a class="btn btn-link" href="#">{{ user.first_name }}({{ user.username }})</a>
-                    <a class="btn btn-link" href="{% url 'djangoapp:logout' %}">Logout</a>
+                    <a class="btn btn-link" style="font-weight: bold; color: #D92121" href="#">{{ user.first_name }}({{ user.username }})</a>
+                    <a class="btn btn-link" style="font-weight: bold; color: black" href="{% url 'djangoapp:logout' %}">Logout</a>
                 </li>
                 {% else %}
                 {% if message %}
@@ -51,10 +51,10 @@
                     <form class="form-inline" action="{% url 'djangoapp:login' %}" method="post">
                         {% csrf_token %}
                         <div class="input-group">
-                            <input type="text" class="form-control" placeholder="Enter Username" name="username" >
-                            <input type="password" class="form-control" placeholder="Enter Password" name="psw" >
-                            <button class="btn btn-primary" type="submit">Login</button>
-                            <a class="btn btn-link" href="{% url 'djangoapp:registration' %}">Sign Up</a>
+                            <input type="text" style="margin:0 5px;" class="form-control" placeholder="Enter Username" name="username" >
+                            <input type="password" style="margin:0 5px;" class="form-control" placeholder="Enter Password" name="psw" >
+                            <button class="btn btn-dark" style="margin:0 5px;" type="submit">Login</button>
+                            <a class="btn btn-dark" style="margin:0 5px;" href="{% url 'djangoapp:registration' %}">Sign Up</a>
                         </div>
                     </form>
                 </li>
@@ -63,8 +63,8 @@
             </ul>
             </div>
         </nav>
-       <div class="card mx-auto" style="width:400px; padding: 20px; margin-top:10px;">
-        <img src="https://media.istockphoto.com/id/1271752802/photo/phone-and-e-mail-icons-on-wooden-cubes-with-contact-us-text-on-blue-background-web-page.jpg?b=1&s=170667a&w=0&k=20&c=hMJ1eJq3u3oHbWGeu4ff2PUWD8w5DHu2A_zJgVAa6pk="
+       <div class="card mx-auto" style="width:400px; padding: 20px; margin-top:10px; background-color: #191A19; color: white;">
+        <img src="https://thumbs.dreamstime.com/b/contact-us-phone-icon-placed-laptop-black-keyboard-background-studio-shot-contact-us-keyboard-159500838.jpg"
         class="card-img-top" alt="contact us image">
         <h4 class="card-title"><br>Feel free to reach out to us at : </h4>
            <address class="card-body">
