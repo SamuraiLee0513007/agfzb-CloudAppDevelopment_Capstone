@@ -46,6 +46,7 @@
                 {% if message %}
               <div class="alert alert-warning"> 
                 {{ message }}
+                {% endif %}
                 <li>
                     <form class="form-inline" action="{% url 'djangoapp:login' %}" method="post">
                         {% csrf_token %}
