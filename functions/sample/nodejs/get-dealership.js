@@ -8,11 +8,11 @@ function main(params) {
     return new Promise(function (resolve, reject) {
         const { CloudantV1 } = require('@ibm-cloud/cloudant');
         const { IamAuthenticator } = require('ibm-cloud-sdk-core');
-        const authenticator = new IamAuthenticator({ apikey: 'jIgFW3QzX8e_k8aAWhYA4SaeDfXQ62Jy0szogP5-eVJa' })
+        const authenticator = new IamAuthenticator({ apikey: 'API KEY TO BE ENTERED' })
         const cloudant = CloudantV1.newInstance({
             authenticator: authenticator
         });
-        cloudant.setServiceUrl('https://apikey-v2-rg5tzn3w5twkdi5w3oiiwrc8i3qlbhhmy8miw6ptjtx:11749eab45d913ef5e98f4276a578e76@148477bd-c1eb-4521-a003-97beae46f41d-bluemix.cloudantnosqldb.appdomain.cloud');
+        cloudant.setServiceUrl('URL TO BE ENTERED');
         if (params.st) {
             // return dealership with this state 
             cloudant.postFind({db:'dealerships',selector:{st:params.st}})
