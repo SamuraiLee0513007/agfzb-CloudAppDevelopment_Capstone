@@ -8,9 +8,9 @@ from ibmcloudant.cloudant_v1 import CloudantV1
 from ibm_cloud_sdk_core.authenticators import IAMAuthenticator
 
 def main(dict): 
-    authenticator = IAMAuthenticator("jIgFW3QzX8e_k8aAWhYA4SaeDfXQ62Jy0szogP5-eVJa")
+    authenticator = IAMAuthenticator("API KEY TO BE ENTERED")
     service = CloudantV1(authenticator=authenticator)
-    service.set_service_url("https://apikey-v2-rg5tzn3w5twkdi5w3oiiwrc8i3qlbhhmy8miw6ptjtx:11749eab45d913ef5e98f4276a578e76@148477bd-c1eb-4521-a003-97beae46f41d-bluemix.cloudantnosqldb.appdomain.cloud")
+    service.set_service_url("URL TO BE ENTERED")
     response = service.post_find(
                 db='reviews',
                 selector={'dealership': {'$eq': int(dict['id'])}},
