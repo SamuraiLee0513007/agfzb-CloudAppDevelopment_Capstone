@@ -15,7 +15,7 @@
    let dbList = getDbs(cloudant);
    return { dbs: dbList };
  }
- 
+
  function getDbs(cloudant) {
    cloudant
      .getAllDbs()
