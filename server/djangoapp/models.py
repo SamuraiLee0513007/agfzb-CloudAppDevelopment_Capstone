@@ -42,13 +42,18 @@ class CarModel(models.Model):
     COUPE = "coupe"
     CONVERTIBLE = "convertible"
     WAGON = "wagon"
+    SPORTS_CAR = "sports_car"
+    OTHERS = "others"
+
     TYPE_CHOICES = [
         (HATCHBACK, "Hatchback"),
         (SEDAN, "Sedan"),
         (SUV, "Sports Utility Vehicle (SUV)"),
         (COUPE, "Coupe"),
         (CONVERTIBLE, "Convertible"),
-        (WAGON, "Wagon")
+        (WAGON, "Wagon"),
+        (SPORTS_CAR, "Sports Car"),
+        (OTHERS, "Others")
     ]
 
     car_type = models.CharField(null=False, max_length=30,\
