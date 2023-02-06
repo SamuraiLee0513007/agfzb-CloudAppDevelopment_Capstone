@@ -4,6 +4,10 @@ import json
 from .models import CarDealer, DealerReview
 from requests.auth import HTTPBasicAuth
 
+from ibm_watson import NaturalLanguageUnderstandingV1
+from ibm_cloud_sdk_core.authenticators import IAMAuthenticator
+from ibm_watson.natural_language_understanding_v1 import Features,SentimentOptions
+
 
 # Create a `get_request` to make HTTP GET requests
 # e.g., response = requests.get(url, params=params, headers={'Content-Type': 'application/json'},
@@ -12,13 +16,26 @@ from requests.auth import HTTPBasicAuth
 def get_request(url, **kwargs):
     print(kwargs)
     print("GET from {} ".format(url))
+    api_key = kwargs.get("apikey")
     try:
         # Call get method of requests library with URL and parameters
-        response = requests.get(url, headers={'Content-Type': 'application/json'},
+        if api_key:
+            # Basic authentication GET
+            params = dict()
+            params["text"] = kwargs["text"]
+            params["version"] = kwargs["version"]
+            params["features"] = kwargs["features"]
+            params["return_analyzed_text"] = kwargs["return_analyzed_text"]
+            response = requests.get(url, params=params, headers={'Content-Type': 'application/json'},
+                                                auth=HTTPBasicAuth('apikey', api_key))
+        else:
+            # no authentication GET
+            response = requests.get(url, headers={'Content-Type': 'application/json'},
                                     params=kwargs)
     except:
         # If any error occurs
         print("Network exception occurred")
+
     status_code = response.status_code
     print("With status {} ".format(status_code))
     json_data = json.loads(response.text)
@@ -27,6 +44,16 @@ def get_request(url, **kwargs):
 
 # Create a `post_request` to make HTTP POST requests
 # e.g., response = requests.post(url, params=kwargs, json=payload)
+def post_request(url, json_payload, **kwargs):
+    try:
+        response = requests.post(url, params=kwargs, json=json_payload)
+    except:
+        print("Network exception occurred")
+
+    status_code = response.status_code
+    print("With status {} ".format(status_code))
+    return response
+
 
 
 # Create a get_dealers_from_cf method to get dealers from a cloud function
@@ -100,8 +127,10 @@ def get_dealer_reviews_from_cf(url, id):
                                         purchase=review["purchase"], review=review["review"],
                                         purchase_date=review["purchase_date"], car_make=review["car_make"],
                                         car_model=review["car_model"], car_year=review["car_year"],
-                                        # sentiment=review["sentiment"], 
+                                        sentiment="S", 
                                         id=review["id"])
+
+            review_obj.sentiment = analyze_review_sentiments(review_obj.review)
 
             results.append(review_obj)
 
@@ -112,6 +141,29 @@ def get_dealer_reviews_from_cf(url, id):
 # def analyze_review_sentiments(text):
 # - Call get_request() with specified arguments
 # - Get the returned sentiment label such as Positive or Negative
+def analyze_review_sentiments(text):
+
+    apikey = "0NCKhwmDpf8cyApj57bkhD-PuDfReJTs1xedDVHWmv54"
+    url = "https://api.us-south.natural-language-understanding.watson.cloud.ibm.com/instances/29d00338-e332-47a4-a9aa-84a1bcd744ee"
+
+    authenticator = IAMAuthenticator(apikey)
+    natural_language_understanding = NaturalLanguageUnderstandingV1(
+    version='2020-08-01',
+    authenticator=authenticator
+    )
+    natural_language_understanding.set_service_url(url)
+
+    response = natural_language_understanding.analyze\
+    (text=text, language="en", features=Features(sentiment=SentimentOptions(targets=[text]))).get_result() 
+
+    # label=json.dumps(response, indent=2) 
+
+    label = response['sentiment']['document']['label'] 
+
+    return label
+
+    
+
 
 
 
