@@ -136,6 +136,17 @@ def get_dealer_reviews_from_cf(url, id):
                                         sentiment="S", 
                                         id=review["id"])
 
+            if "id" in review:
+                review_obj.id = review["id"]
+            if "purchase_date" in review:
+                review_obj.purchase_date = review["purchase_date"]
+            if "car_make" in review:
+                review_obj.car_make = review["car_make"]
+            if "car_model" in review:
+                review_obj.car_model = review["car_model"]
+            if "car_year" in review:
+                review_obj.car_year = review["car_year"]
+
             review_obj.sentiment = analyze_review_sentiments(review_obj.review)
 
             results.append(review_obj)

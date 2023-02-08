@@ -93,7 +93,7 @@ class CarDealer:
         self.zip = zip
 
     def __str__(self):
-        return "Dealer name: " + self.full_name + " END .... "
+        return "Dealer name: " + self.full_name
 
 
 # <HINT> Create a plain Python class `DealerReview` to hold review data
@@ -114,7 +114,7 @@ class DealerReview:
     def __str__(self):
         return "Reviewer Name : " + self.name + " , " +\
                 "Review : " + self.review + " , " +\
-                "Sentiment : " + self.sentiment + " END "
+                "Sentiment : " + self.sentiment
 
     def to_json(self):
         return json.dumps(self, default=lambda o: o.__dict__,
