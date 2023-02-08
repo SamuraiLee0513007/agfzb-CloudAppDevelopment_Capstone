@@ -4,9 +4,9 @@ from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404, render, redirect
 
 # from .models import related models
-from .models import CarDealer, DealerReview
+from .models import CarDealer, DealerReview, CarModel
 # from .restapis import related methods
-from .restapis import get_dealers_from_cf, get_dealer_reviews_from_cf, post_request
+from .restapis import get_dealers_from_cf, get_dealer_by_id_from_cf, get_dealer_reviews_from_cf, post_request
 
 from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages
@@ -126,7 +126,7 @@ def add_review(request, id):
     context["dealer"] = dealer
     if request.method == 'GET':
         # Get cars for the dealer
-        cars = CarModel.objects.all()
+        cars = CarModel.objects.filter(dealer_id=id)
         # print(cars)
         context["cars"] = cars
         
@@ -153,11 +153,12 @@ def add_review(request, id):
             review["car_year"] = int(car.year.strftime("%Y"))
 
             json_payload = dict()
-            json_payload["review"] = payload
+            json_payload["review"] = review
             review_post_url =  "https://us-south.functions.appdomain.cloud/api/v1/web/0ae430ec-433d-428f-af71-e740b602fbcc/dealership-package/post-review"
             result = post_request(review_post_url, json_payload, id=id)
-        # return redirect("djangoapp:dealer_details", id=id)
-        return HttpResponse(result)
+            print(result)
+
+        return redirect("djangoapp:dealer_details", id=id)
 
 
 
