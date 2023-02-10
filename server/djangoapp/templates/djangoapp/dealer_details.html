@@ -66,35 +66,73 @@
                 <div class="alert alert-warning" role="alert">{{ message }}</div>
             {% endfor %}
         {% endif %}
-    
-        <h3>Reviews for <b>{{dealer.full_name}}</b></h3>
-    
-        <div class="container">
+
+        <div class="container" style="width : 80%; margin-top : 3%;">
+        <h1 style="color:white" ><b>{{dealer.full_name}}</b></h1>
+        
+        <table id="table" class="table table-dark table-striped">
+            <tbody>
+                <tr>
+                    <th>Dealer ID</th>
+                    <td>{{dealer.id}}</th>
+                </tr>
+              <tr>
+                <th>Address</th>
+                <td>{{dealer.address}}</td>
+              </tr>
+              <tr>
+                <th>City</th>
+                <td>{{dealer.city}}</td>
+              </tr>
+              <tr>
+                <th>Zip Code</th>
+                <td>{{dealer.zip}}</td>
+              </tr>
+              <tr>
+                <th>State</th>
+                <td>{{dealer.state}}</td>
+              </tr>
+              <tr>
+                <th>Location</th>
+                <td>Latitude : {{dealer.lat}}, Longitude : {{dealer.long}}</td>
+              </tr>
+            </tbody>
+          </table>
+          <div>
+              <h3 style="color:white" >Reviews</h3>
+              {% if not reviews %}
+                <br>
+                <h5 style="color:white">No reviews available. Be the first one to write!</h5>
+              {% endif %}
             <div class="card-columns">
                 {% for review in reviews %}
                 <div class="col-auto mb-3">
                     <div class="card">
                         {% if review.sentiment == "positive" %}
                             <img class="card-img-left" src="{{MEDIA_URL}}/emoji/positive.png" width="36px" height="36px"
-                                 alt="Sentiment">
+                                 alt="Sentiment" style="margin : 10px">
                         {% elif review.sentiment == "negative" %}
                             <img class="card-img-left" src="{{MEDIA_URL}}/emoji/negative.png" width="36px" height="36px"
-                                       alt="Sentiment">
+                                       alt="Sentiment" style="margin : 10px">
                             {% else %}
                             <img class="card-img-left" src="{{MEDIA_URL}}/emoji/neutral.png" width="36px" height="36px"
-                                       alt="Sentiment">
+                                       alt="Sentiment" style="margin : 10px">
                         {% endif %}
                         <div class="card-body bg-light">
                                   {% if review.car_make%}
+                                      <p>Reviewed by : {{review.name}}</p>
                                       <h5 class="card-title">{{review.car_make}}, {{review.car_model}} </h5>
                                       <h5 class="card-title">{{review.car_year}}</h5>
-                                   {% endif %}
+                                  {% endif %}
                                   <p class="card-text">{{review.review}}</p>
                         </div>
                     </div>
                 </div>
                 {% endfor %}
+
+                
             </div>
+        </div>
         </div>
     </div>
 
