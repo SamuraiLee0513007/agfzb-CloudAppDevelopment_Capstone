@@ -34,7 +34,7 @@ class CarModel(models.Model):
 
     # Informations on CarModel Table
     name = models.CharField(null=False, max_length=30, default="Specify Model")
-    dealer_id = models.IntegerField(null=False)
+    dealer_id = models.IntegerField(default=1)
 
     HATCHBACK = "hatchback"
     SEDAN = "sedan"

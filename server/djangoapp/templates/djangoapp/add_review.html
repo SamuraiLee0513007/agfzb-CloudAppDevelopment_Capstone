@@ -10,31 +10,79 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/js/bootstrap-datepicker.js"></script>
 
 </head>
-    <body>
+
+    <body style="background-image: url('https://m.media-amazon.com/images/I/8126RrTSQHL._SL1500_.jpg'); 
+    background-size: cover; background-repeat: no-repeat;">
+    <!-- Navbar section here -->
+    <nav class="navbar navbar-expand-sm bg-light">
+        <div class="container-fluid">
+            <div class="navbar-brand">
+                <img src="https://st4.depositphotos.com/25658280/27299/v/600/depositphotos_272990568-stock-illustration-car-dealer-logo-icon-vector.jpg" 
+                alt="company logo" width="60px" >
+                <b>Best Cars Dealership</b>
+            </div>
+        <ul class="navbar-nav ml-auto">
+
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'djangoapp:index' %}" style="font-weight: bold; color: black">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" style="font-weight: bold; color: black" class="active" href="{% url 'djangoapp:about' %}">About</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link"  style="font-weight: bold; color: black" href="{% url 'djangoapp:contact' %}">Contact Us</a>
+            </li>
+
+            {% if user.is_authenticated %}
+                <li>
+                    <a class="btn btn-link" style="font-weight: bold; color: #D92121" href="#">{{ user.first_name }}({{ user.username }})</a>
+                    <a class="btn btn-link" style="font-weight: bold; color: black" href="{% url 'djangoapp:logout' %}">Logout</a>
+                </li>
+                {% else %}
+                {% if message %}
+              <div class="alert alert-warning"> 
+                {{ message }}
+              </div>
+                {% endif %}
+                <li>
+                    <form class="form-inline" action="{% url 'djangoapp:login' %}" method="post">
+                        {% csrf_token %}
+                        <div class="input-group">
+                            <input type="text" style="margin:0 5px;" class="form-control" placeholder="Enter Username" name="username" >
+                            <input type="password" style="margin:0 5px;" class="form-control" placeholder="Enter Password" name="psw" >
+                            <button class="btn btn-dark" style="margin:0 5px;" type="submit">Login</button>
+                            <a class="btn btn-dark" style="margin:0 5px;" href="{% url 'djangoapp:registration' %}">Sign Up</a>
+                        </div>
+                    </form>
+                </li>
+            {% endif %}
+    
+        </ul>
+        </div>
+    </nav>
     <!--Add review form here -->
-    <div class="container-fluid">
-        <h3>Add a review about <b>{{dealer.full_name}}</b></h3>
+    <div class="container-fluid" style="width : 60%; margin-top : 3%; padding: 3%; border-radius:5px; color:white; background-color:#212122">
+        <h3>Write your review about <b>{{dealer.full_name}}</b></h3>
         <form action="{% url 'djangoapp:add_review' dealer.id %}" method="post">
             <div class="form-group">
-    
                   <div class="mb-3">
-                      <label for="content"><b>Enter the review content: </b></label>
-                      <textarea class="form-control" id="content" name="content" rows="2" required></textarea>
+                      <label for="content"><b>Type your review below</b></label>
+                      <textarea class="form-control" id="content" name="content" rows="5" required></textarea>
                   </div>
     
                   <div class="form-check">
                       <input class="form-check-input" type="checkbox" name="purchasecheck" id="purchasecheck">
                       <label class="form-check-label" for="purchasecheck">
-                          Has purchased the car from {{dealer.full_name}} ?
+                          <b>Have you purchased the car from {{dealer.full_name}}?</b> (Check the box if Yes)
                       </label>
                       <label class="text-muted">(select purchased car information below if checked)</label>
                   </div>
     
                   <div class="mb-3">
-                      <label for="car"><b>Select your car (model-make-year):</b></label>
+                      <label for="car"><b>Select Your Car ( Make - Model - Year ) : </b></label>
                       <select name="car" id="car" class="form-select" required>
                           {% for car in cars %}
-                          <option selected value={{car.id}}>{{car.name}}-{{car.car_make.name}}-{{ car.year|date:"Y" }}</option>
+                          <option selected value={{car.id}}>{{car.car_make.name}} - {{car.name}} - {{ car.year|date:"Y" }}</option>
                           {% endfor %}
                       </select>
                   </div>
@@ -47,7 +95,7 @@
             </div>
             {% csrf_token %}
             <div>
-                <button class="btn btn-primary" type="submit">Submit</button>
+                <button class="btn btn-primary" style="background-color: #D92121; color: white" type="submit"><b>Submit</b></button>
             </div>
             {% if messages %}
                 {% for message in messages %}
@@ -57,4 +105,9 @@
         </form>
     </div>
     </body>
+    <script type="text/javascript">
+        $('.date-own input').datepicker({
+           format: 'dd/mm/yyyy'
+         });
+    </script>
 </html>

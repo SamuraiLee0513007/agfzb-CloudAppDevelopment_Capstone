@@ -133,7 +133,7 @@ def add_review(request, id):
     context["dealer"] = dealer
     if request.method == 'GET':
         # Get cars for the dealer
-        cars = CarModel.objects.filter(dealer_id=id)
+        cars = CarModel.objects.all()
         # print(cars)
         context["cars"] = cars
         
