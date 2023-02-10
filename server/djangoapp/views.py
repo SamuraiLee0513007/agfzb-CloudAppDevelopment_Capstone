@@ -155,7 +155,7 @@ def add_review(request, id):
                 if request.POST["purchasecheck"] == 'on':
                     review["purchase"] = True
             review["purchase_date"] = request.POST["purchasedate"]
-            review["car_make"] = car.make.name
+            review["car_make"] = car.car_make.name
             review["car_model"] = car.name
             review["car_year"] = int(car.year.strftime("%Y"))
 

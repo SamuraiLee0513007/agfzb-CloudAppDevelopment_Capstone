@@ -47,8 +47,8 @@ def get_request(url, **kwargs):
 def post_request(url, json_payload, **kwargs):
     print(kwargs)
     print("POST to {} ".format(url))
-    print(payload)
-    response = requests.post(url, params=kwargs, json=payload)
+    # print(payload)
+    response = requests.post(url, params=kwargs, json=json_payload)
     status_code = response.status_code
     print("With status {} ".format(status_code))
     json_data = json.loads(response.text)

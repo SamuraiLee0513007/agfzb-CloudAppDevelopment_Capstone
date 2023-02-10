@@ -34,7 +34,6 @@
                 <li>
                     <a class="btn btn-link" style="font-weight: bold; color: #D92121" href="#">{{ user.first_name }}({{ user.username }})</a>
                     <a class="btn btn-link" style="font-weight: bold; color: black" href="{% url 'djangoapp:logout' %}">Logout</a>
-                    <a class="btn btn-link" style="font-weight: bold; color: #D92121" href="#">Add Review</a>
                 </li>
                 {% else %}
                 {% if message %}
@@ -100,6 +99,10 @@
           </table>
           <div>
               <h3 style="color:white" >Reviews</h3>
+              {% if user.is_authenticated %}
+              <a class="btn btn-info" style="font-weight: bold; margin-top: 5px; margin-bottom: 3%; background-color: #D92121; color:white" href="{% url 'djangoapp:add_review' dealer.id %}">
+                Write Your Review</a>
+              {% endif %}
               {% if not reviews %}
                 <br>
                 <h5 style="color:white">No reviews available. Be the first one to write!</h5>
@@ -129,8 +132,6 @@
                     </div>
                 </div>
                 {% endfor %}
-
-                
             </div>
         </div>
         </div>
