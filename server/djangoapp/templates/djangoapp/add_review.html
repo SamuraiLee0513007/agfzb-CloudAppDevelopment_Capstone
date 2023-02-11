@@ -67,7 +67,7 @@
             <div class="form-group">
                   <div class="mb-3">
                       <label for="content"><b>Type your review below</b></label>
-                      <textarea class="form-control" id="content" name="content" rows="5" required></textarea>
+                      <textarea class="form-control" id="content" name="content" rows="5" placeholder= "I visited {{dealer.full_name}} on ...... " required></textarea>
                   </div>
     
                   <div class="form-check">
@@ -88,8 +88,8 @@
                   </div>
     
                   <div class="mb-3">
-                      <label for="purchasedate"><b>Select Your Purchase Date: </b></label>
-                      <input class="date-own form-control" style="width: 300px;" type="text" name="purchasedate" id="purchasedate">
+                      <label for="purchasedate"><b>Select Your Purchase Date (DD/MM/YYYY) : </b></label>
+                      <input class="date-own form-control" style="width: 300px;" type="date" name="purchasedate" id="purchasedate">
                   </div>
     
             </div>
@@ -106,7 +106,7 @@
     </div>
     </body>
     <script type="text/javascript">
-        $('.date-own input').datepicker({
+        $('.date-own').datepicker({
            format: 'dd/mm/yyyy'
          });
     </script>
