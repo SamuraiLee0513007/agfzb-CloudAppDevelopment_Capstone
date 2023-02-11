@@ -141,13 +141,14 @@ def add_review(request, id):
     if request.method == 'POST':
         if request.user.is_authenticated:
             username = request.user.username
+            name = request.user.first_name + " " + request.user.last_name
             # print(request.POST)
             review = dict()
             car_id = request.POST["car"]
             car = CarModel.objects.get(pk=car_id)
             review["time"] = datetime.utcnow().isoformat()
             review["dealership"] = id
-            review["name"] = username
+            review["name"] = name
             review["id"] = id
             review["review"] = request.POST["content"]
             review["purchase"] = False
