@@ -94,7 +94,7 @@ def registration_request(request):
 def get_dealerships(request):
     context = {}
     if request.method == "GET":
-        url = "https://us-south.functions.appdomain.cloud/api/v1/web/0ae430ec-433d-428f-af71-e740b602fbcc/dealership-package/get-dealership"
+        url = "https://us-south.functions.appdomain.cloud/api/v1/web/2d1d18e3-4f16-411e-b488-6d38510eadd3/dealership-package/get-dealership"
         # Get dealers from the URL
         dealerships = get_dealers_from_cf(url)
         # Concat all dealer's short name
@@ -112,11 +112,11 @@ def get_dealerships(request):
 def get_dealer_details(request, id):
     if request.method == "GET":
         context = {}
-        dealer_url = "https://us-south.functions.appdomain.cloud/api/v1/web/0ae430ec-433d-428f-af71-e740b602fbcc/dealership-package/get-dealership"
+        dealer_url = "https://us-south.functions.appdomain.cloud/api/v1/web/2d1d18e3-4f16-411e-b488-6d38510eadd3/dealership-package/get-dealership"
         dealer = get_dealer_by_id_from_cf(dealer_url, id=id)
         context["dealer"] = dealer
     
-        review_url = "https://us-south.functions.appdomain.cloud/api/v1/web/0ae430ec-433d-428f-af71-e740b602fbcc/dealership-package/get-review"
+        review_url = "https://us-south.functions.appdomain.cloud/api/v1/web/2d1d18e3-4f16-411e-b488-6d38510eadd3/dealership-package/get-review"
         reviews = get_dealer_reviews_from_cf(review_url, id=id)
         print(reviews)
         context["reviews"] = reviews
@@ -128,7 +128,7 @@ def get_dealer_details(request, id):
 # ...
 def add_review(request, id):
     context = {}
-    url = "https://us-south.functions.appdomain.cloud/api/v1/web/0ae430ec-433d-428f-af71-e740b602fbcc/dealership-package/get-dealership"
+    url = "https://us-south.functions.appdomain.cloud/api/v1/web/2d1d18e3-4f16-411e-b488-6d38510eadd3/dealership-package/get-dealership"
     dealer = get_dealer_by_id_from_cf(url, id=id)
     context["dealer"] = dealer
     if request.method == 'GET':
@@ -162,7 +162,7 @@ def add_review(request, id):
 
             json_payload = dict()
             json_payload["review"] = review
-            review_post_url =  "https://us-south.functions.appdomain.cloud/api/v1/web/0ae430ec-433d-428f-af71-e740b602fbcc/dealership-package/post-review"
+            review_post_url =  "https://us-south.functions.appdomain.cloud/api/v1/web/2d1d18e3-4f16-411e-b488-6d38510eadd3/dealership-package/post-review"
             result = post_request(review_post_url, json_payload, id=id)
             print(result)
 
