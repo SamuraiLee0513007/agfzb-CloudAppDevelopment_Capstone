@@ -27,7 +27,7 @@ DEBUG = True
 
 APPEND_SLASH = True
 
-ALLOWED_HOSTS = ["*","ap-southeast-2.awsapprunner.com"]
+ALLOWED_HOSTS = ["*",".codeengine.appdomain.cloud"]
 
 
 # Application definition

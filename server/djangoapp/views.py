@@ -6,7 +6,7 @@ from django.shortcuts import get_object_or_404, render, redirect
 # from .models import related models
 from .models import CarDealer, DealerReview, CarModel
 # from .restapis import related methods
-from .restapis import get_dealers_from_cf, get_dealer_by_id_from_cf, get_dealer_reviews_from_cf, post_request
+from .restapis import get_dealers_from_cf, get_dealer_reviews_from_cf, post_request
 
 from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages
@@ -113,7 +113,7 @@ def get_dealer_details(request, id):
     if request.method == "GET":
         context = {}
         dealer_url = "https://us-south.functions.appdomain.cloud/api/v1/web/2d1d18e3-4f16-411e-b488-6d38510eadd3/dealership-package/get-dealership"
-        dealer = get_dealer_by_id_from_cf(dealer_url, id=id)
+        dealer = get_dealers_from_cf(dealer_url, id=id)
         context["dealer"] = dealer
     
         review_url = "https://us-south.functions.appdomain.cloud/api/v1/web/2d1d18e3-4f16-411e-b488-6d38510eadd3/dealership-package/get-review"
@@ -129,7 +129,7 @@ def get_dealer_details(request, id):
 def add_review(request, id):
     context = {}
     url = "https://us-south.functions.appdomain.cloud/api/v1/web/2d1d18e3-4f16-411e-b488-6d38510eadd3/dealership-package/get-dealership"
-    dealer = get_dealer_by_id_from_cf(url, id=id)
+    dealer = get_dealers_from_cf(url, id=id)
     context["dealer"] = dealer
     if request.method == 'GET':
         # Get cars for the dealer
