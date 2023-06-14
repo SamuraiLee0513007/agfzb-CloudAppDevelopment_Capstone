@@ -16,7 +16,6 @@ from ibm_watson.natural_language_understanding_v1 import Features,SentimentOptio
 def get_request(url, **kwargs):
     print(kwargs)
     print("GET from {} ".format(url))
-    api_key = kwargs.get("apikey")
     response = requests.get(url, headers={'Content-Type': 'application/json'},
                                     params=kwargs)
     status_code = response.status_code
