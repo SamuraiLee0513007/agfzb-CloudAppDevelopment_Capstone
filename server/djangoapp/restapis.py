@@ -17,25 +17,8 @@ def get_request(url, **kwargs):
     print(kwargs)
     print("GET from {} ".format(url))
     api_key = kwargs.get("apikey")
-    try:
-        # Call get method of requests library with URL and parameters
-        if api_key:
-            # Basic authentication GET
-            params = dict()
-            params["text"] = kwargs["text"]
-            params["version"] = kwargs["version"]
-            params["features"] = kwargs["features"]
-            params["return_analyzed_text"] = kwargs["return_analyzed_text"]
-            response = requests.get(url, params=params, headers={'Content-Type': 'application/json'},
-                                                auth=HTTPBasicAuth('apikey', api_key))
-        else:
-            # no authentication GET
-            response = requests.get(url, headers={'Content-Type': 'application/json'},
+    response = requests.get(url, headers={'Content-Type': 'application/json'},
                                     params=kwargs)
-    except:
-        # If any error occurs
-        print("Network exception occurred")
-
     status_code = response.status_code
     print("With status {} ".format(status_code))
     json_data = json.loads(response.text)
@@ -159,23 +142,9 @@ def get_dealer_reviews_from_cf(url, id):
 # - Call get_request() with specified arguments
 # - Get the returned sentiment label such as Positive or Negative
 def analyze_review_sentiments(text):
-    apikey = "RXqz8AZvDrtEmZkUawphBEZpM1sRvZVUMCbsEUN7Xr6P"
-    url = "https://api.us-south.natural-language-understanding.watson.cloud.ibm.com/instances/9933667d-202c-45b2-b744-b3d662390303"
-
-    authenticator = IAMAuthenticator(apikey)
-    natural_language_understanding = NaturalLanguageUnderstandingV1(
-    version='2020-08-01',
-    authenticator=authenticator
-    )
-    natural_language_understanding.set_service_url(url)
-
-    response = natural_language_understanding.analyze\
-    (text=text, language="en", features=Features(sentiment=SentimentOptions(targets=[text]))).get_result() 
-
     # label=json.dumps(response, indent=2) 
-
-    label = response['sentiment']['document']['label'] 
-
+    response=get_request("https://us-south.functions.appdomain.cloud/api/v1/web/2d1d18e3-4f16-411e-b488-6d38510eadd3/default/sentiment", text=text)
+    label = response['label'] 
     return label
 
     
