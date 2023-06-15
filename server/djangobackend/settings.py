@@ -27,7 +27,7 @@ DEBUG = True
 
 APPEND_SLASH = True
 
-ALLOWED_HOSTS = ["*",".codeengine.appdomain.cloud"]
+ALLOWED_HOSTS = ["*",".run.app"]
 
 
 # Application definition

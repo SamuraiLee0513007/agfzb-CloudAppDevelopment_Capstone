@@ -20,7 +20,7 @@ spec:
         run: dealership
     spec:
       containers:
-      - image: us.icr.io/ibm_project/carshop:v1
+      - image: asia-east2-docker.pkg.dev/cyleeax/ibm/carshop:v1
         imagePullPolicy: Always
         name: dealership
         ports:
