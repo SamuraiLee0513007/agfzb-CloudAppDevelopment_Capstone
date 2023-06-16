@@ -14,7 +14,7 @@ def main(dict):
     )
     natural_language_understanding.set_service_url(url)
 
-    response = natural_language_understanding.analyze(text=dict['text'], language="en", features=Features(sentiment=SentimentOptions(targets=[dict['text']]))).get_result() 
+    response = natural_language_understanding.analyze(text=dict['text'],features=Features(sentiment=SentimentOptions(targets=[dict['text']]))).get_result() 
     label = response['sentiment']['document']['label'] 
     result= {
         'headers': {'Content-Type':'application/json'}, 
